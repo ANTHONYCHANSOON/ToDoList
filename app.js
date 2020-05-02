@@ -2,20 +2,54 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
-bodyParser.urlencoded({ extended: true });
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 var whatDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+var weekDayEnd = "";
 
 app.get("/", function (req, res) {
     // res.send("hello");
     let today = new Date();
 
     if (today.getDay() === 6 || today.getDay() === 0) {
-        res.send("Saturday/Sunday " + whatDay[today.getDay()])
+        //res.send("Saturday/Sunday " + whatDay[today.getDay()]);
+        //res.render("list", { kindOfDay: whatDay[today.getDay()] })
+        weekDayEnd = "weekend";
     } else {
-        res.send("M-F " + whatDay[today.getDay()])
+        //res.send("M-F " + whatDay[today.getDay()]);
+        //res.render("list", { kindOfDay: whatDay[today.getDay()] })
+        weekDayEnd = "weekday";
     }
+
+    // res.render("list",
+    //     {
+    //         kindOfDay: weekDayEnd,
+    //         dayDay: whatDay[today.getDay()]
+    //     }
+    // )
+
+
+    //tolocalestring
+
+    var options = {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+    };
+
+    var myday = today.toLocaleDateString("en-US", options);
+
+    res.render("list",
+        {
+            kindOfDay: weekDayEnd,
+            dayDay: whatDay[today.getDay()],
+            completeDay: myday
+        })
+})
+
+app.post("/", function (req, res) {
+    console.log(req.body)
 })
 
 app.listen(process.env.PORT || 3000, function () {
