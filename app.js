@@ -7,7 +7,7 @@ app.set('view engine', 'ejs');
 
 var whatDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 var weekDayEnd = "";
-var items = [];
+var items = ["buy food","cook food","eat food"];
 
 app.get("/", function (req, res) {
     // res.send("hello");
