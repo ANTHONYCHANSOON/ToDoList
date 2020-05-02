@@ -7,6 +7,7 @@ app.set('view engine', 'ejs');
 
 var whatDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 var weekDayEnd = "";
+var items = [];
 
 app.get("/", function (req, res) {
     // res.send("hello");
@@ -44,12 +45,16 @@ app.get("/", function (req, res) {
         {
             kindOfDay: weekDayEnd,
             dayDay: whatDay[today.getDay()],
-            completeDay: myday
+            completeDay: myday,
+            newListItem : items
         })
 })
 
 app.post("/", function (req, res) {
-    console.log(req.body)
+    //console.log(req.body);
+    item = req.body.newItem
+    items.push(item);
+    res.redirect("/")
 })
 
 app.listen(process.env.PORT || 3000, function () {
