@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+    <%- include("header") -%>
+    <div class="box" id="heading">
+        <!-- <h1>Weekday/Weekend = <%= kindOfDay %></h1>
+        <h2>Day = <%= dayDay %></h2> -->
+        <h1> <%= completeDay %></h1>
+    </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do List</title>
-</head>
-
-<body>
-    <h1>Weekday/Weekend = <%= kindOfDay %></h1>
-    <h2>Day = <%= dayDay %></h2>
-    <h1>testdate = <%= completeDay %></h1>
-
-    <ul>
+    <div class="box">
         <!-- <li><%= newListItem %></li> -->
-
         <% for(let i = 0; i < newListItem.length; i++) { %>
-        <li><%= newListItem[i] %></li>
+        <div class="item">
+            <input type="checkbox">
+            <p><%= newListItem[i] %></p>
+        </div>
         <%}%>
 
-    </ul>
-    <form class="" action="/" method="post">
-        <input type="text" name="newItem" placeholder="New Task">
-        <button type="submit">Add</button>
-    </form>
-</body>
+        <form class="item" action="/" method="post">
+            <input type="text" name="newItem" placeholder="New Task" autocomplete="off">
+            <button type="submit">+</button>
+        </form>
 
-</html>
+    </div>
+    <%- include("footer") -%>
