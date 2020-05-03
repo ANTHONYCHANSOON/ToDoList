@@ -1,7 +1,5 @@
     <%- include("header") -%>
     <div class="box" id="heading">
-        <!-- <h1>Weekday/Weekend = <%= kindOfDay %></h1>
-        <h2>Day = <%= dayDay %></h2> -->
         <h1> <%= completeDay %></h1>
     </div>
 
@@ -16,7 +14,7 @@
 
         <form class="item" action="/" method="post">
             <input type="text" name="newItem" placeholder="New Task" autocomplete="off">
-            <button type="submit">+</button>
+            <button type="submit" name = "list" value = <%= completeDay %> </button>+</button>
         </form>
 
     </div>

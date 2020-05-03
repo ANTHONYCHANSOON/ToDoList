@@ -9,8 +9,8 @@ app.set('view engine', 'ejs');
 
 var whatDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 var weekDayEnd = "";
-var items = ["buy food","cook food","eat food"];
-
+var items = ["buy food", "cook food", "eat food"];
+var workItems = [];
 
 app.get("/", function (req, res) {
     // res.send("hello");
@@ -49,16 +49,38 @@ app.get("/", function (req, res) {
             kindOfDay: weekDayEnd,
             dayDay: whatDay[today.getDay()],
             completeDay: myday,
-            newListItem : items
+            newListItem: items
         })
 })
 
 app.post("/", function (req, res) {
-    //console.log(req.body);
+    console.log(req.body);
     item = req.body.newItem
-    items.push(item);
-    res.redirect("/")
+
+    if(req.body.list === "Work") {
+        workItems.push(item);
+        res.redirect("/work")
+    } else {
+        items.push(item);
+        res.redirect("/")
+    }
 })
+
+app.get("/work", function (req, res) {
+    
+    res.render("list",
+        {
+            completeDay: "Work Checklist",
+            newListItem: workItems
+        }
+    )
+})
+
+// app.post("/work", function(req,res) {
+//     let item = req.body.newItem;
+//     workItems.push(item);
+//     res.redirect("/work");
+// })
 
 app.listen(process.env.PORT || 3000, function () {
     console.log(`port is ${process.env.PORT || 3000}`);
